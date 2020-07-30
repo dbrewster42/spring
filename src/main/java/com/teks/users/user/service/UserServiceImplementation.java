@@ -23,6 +23,9 @@ public class UserServiceImplementation implements UserService {
         this.userRepository = userRepository;
         this.utils = utils;
     }
+//    public UserServiceImplementation(){
+//
+//    }
 
     @Override
 //    public void createUser(User user){

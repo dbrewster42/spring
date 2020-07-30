@@ -15,12 +15,12 @@ public class User {
     private String encryptedPassword;
     private boolean emailVerificationStatus = false;
 
-    public User(int id, String firstName, String lastName, String email, String encryptedPassword) {
+    public User(int id, String firstName, String lastName, String email) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        this.encryptedPassword = encryptedPassword;
+//        this.encryptedPassword = encryptedPassword;
     }
 
     public User(){

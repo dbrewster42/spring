@@ -1,15 +1,21 @@
 package com.teks.users.user.utils;
 
 import com.teks.users.user.dto.UserDto;
+import org.springframework.context.annotation.Configuration;
 
 import java.security.SecureRandom;
 import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+@Configuration
 public class Utils {
     private final Random RANDOM = new SecureRandom();
     private final String ALPHABET = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234568790";
+
+//    public Utils(){
+//
+//    }
 
     public String generateUserId(int length){
         return generateRandomString(length);

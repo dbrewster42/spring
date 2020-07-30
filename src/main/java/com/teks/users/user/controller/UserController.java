@@ -51,9 +51,9 @@ public class UserController {
         List<UserDto> returnValue = userService.getAllUsers(page, limit);
         return returnValue;
     }
-    @GetMapping("/{id}")
-    public User getUser(@PathVariable int id){
-        User returnValue = userService.getUser(id);
+    @GetMapping("/{userId}")
+    public User getUser(@PathVariable String userId){
+        User returnValue = userService.getUser(userId);
         return returnValue;
     }
     @GetMapping("/email/{email}")
@@ -62,9 +62,9 @@ public class UserController {
         return returnValue;
     }
 
-    @DeleteMapping("/{id}")
-    public void deleteUser(@PathVariable int id){
-        userService.deleteUser(id);
+    @DeleteMapping("/{userid}")
+    public void deleteUser(@PathVariable String userId){
+        userService.deleteUser(userId);
     }
 }
 //    @PostMapping
