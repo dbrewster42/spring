@@ -1,13 +1,15 @@
 package com.teks.users.user.service;
 
 import com.teks.users.user.model.User;
+import com.teks.users.user.dto.UserDto;
+
 import java.util.List;
 
 public interface UserService {
-    List<User> getAllUsers();
+    List<UserDto> getAllUsers(int page, int limit);
     User getUser(int id);
     User getUser(String email);
-    void createUser(User user);
+    UserDto createUser(UserDto userDto);
     void deleteUser(int id);
-    User updateUser(int id, User user);
+    UserDto updateUser(int id, UserDto userDto);
 }
