@@ -4,9 +4,9 @@ import javax.persistence.*;
 
 @Entity
 public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.AUTO)
+//    private int id;
     private String userId;
     private String firstName;
     private String lastName;
@@ -15,8 +15,8 @@ public class User {
     private String encryptedPassword;
     private boolean emailVerificationStatus = false;
 
-    public User(int id, String firstName, String lastName, String email) {
-        this.id = id;
+    public User(String firstName, String lastName, String email) {
+//        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -68,7 +68,7 @@ public class User {
         return encryptedPassword;
     }
 
-    public void getEncryptedPassword(String encryptedPassword) {
+    public void setEncryptedPassword(String encryptedPassword) {
         this.encryptedPassword = encryptedPassword;
     }
 

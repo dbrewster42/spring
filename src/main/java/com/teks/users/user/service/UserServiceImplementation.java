@@ -1,6 +1,9 @@
 package com.teks.users.user.service;
 
 import com.teks.users.user.dto.UserDto;
+import com.teks.users.user.exceptions.InvalidEmailException;
+import com.teks.users.user.exceptions.UserExceptions;
+import com.teks.users.user.exceptions.UserNotFoundException;
 import com.teks.users.user.model.User;
 import com.teks.users.user.repository.UserRepository;
 import com.teks.users.user.utils.Utils;
@@ -28,33 +31,27 @@ public class UserServiceImplementation implements UserService {
 //    }
 
     @Override
-//    public void createUser(User user){
     public UserDto createUser(UserDto userDto){
         User newUser = new User();
         BeanUtils.copyProperties(userDto, newUser);
 
-//        newUser.setEncryptedPassword("test");
+        newUser.setEncryptedPassword("test");
         newUser.setEmailVerificationStatus(utils.emailIsValid(userDto));
         if (!newUser.getEmailVerificationStatus()){
-
+            throw new InvalidEmailException();
         }
         newUser.setUserId(utils.generateUserId(15));
 
         User storedUserDetails = userRepository.save(newUser);
-        if (storedUserDetails == null){
-//            throw UserException.
-        }
+        if (storedUserDetails == null){ throw new UserNotFoundException(); }
 
         UserDto returnValue = new UserDto();
         BeanUtils.copyProperties(storedUserDetails, returnValue);
         return returnValue;
-//        userRepository.save(user);
     }
     @Override
-    public UserDto updateUser(int id, UserDto userDto){
-        User updatedUser = userRepository.findById(id);
-//        User updateValue = userRepository.findById(id);
-//        updateValue = userDto;
+    public UserDto updateUser(String userId, UserDto userDto){
+        User updatedUser = userRepository.findByUserId(userId);
         BeanUtils.copyProperties(updatedUser, userDto);
         userRepository.save(updatedUser);
         return userDto;
@@ -78,18 +75,22 @@ public class UserServiceImplementation implements UserService {
     }
 
     @Override
-    public User getUser(int id){
-        User returnValue = userRepository.findById(id);
+    public UserDto getUser(String userId){
+        User user = userRepository.findByUserId(userId);
+        UserDto returnValue = new UserDto();
+        BeanUtils.copyProperties(user, returnValue);
         return returnValue;
     }
     @Override
-    public User getUser(String email){
-        User returnValue = userRepository.findByEmail(email);
+    public UserDto getUserByEmail(String email){
+        User user = userRepository.findByEmail(email);
+        UserDto returnValue = new UserDto();
+        BeanUtils.copyProperties(user, returnValue);
         return returnValue;
     }
     @Override
-    public void deleteUser(int id){
-        User deleteValue = userRepository.findById(id);
+    public void deleteUser(String userId){
+        User deleteValue = userRepository.findByUserId(userId);
 //        userRepository.deleteUser(deleteValue);
         userRepository.delete(deleteValue);
     }

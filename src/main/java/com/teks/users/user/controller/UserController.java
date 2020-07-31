@@ -9,6 +9,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -20,8 +21,8 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_RSS_XML_VALUE },
-            produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_RSS_XML_VALUE }
+    @PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_RSS_XML_VALUE },
+            produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_RSS_XML_VALUE }
     )
     public UserResponse createUser(@RequestBody UserRequest userRequest){
         UserDto userDto = new UserDto();
@@ -34,11 +35,11 @@ public class UserController {
         return returnValue;
     }
     @PutMapping("/{id}")
-    public UserResponse updateUser(@PathVariable int id, @RequestBody UserRequest userRequest){
+    public UserResponse updateUser(@PathVariable String userId, @RequestBody UserRequest userRequest){
         UserDto userDto = new UserDto();
         BeanUtils.copyProperties(userRequest, userDto);
 
-        UserDto updatedUser = userService.updateUser(id, userDto);
+        UserDto updatedUser = userService.updateUser(userId, userDto);
 
         UserResponse returnValue = new UserResponse();
         BeanUtils.copyProperties(updatedUser, returnValue);
@@ -46,19 +47,30 @@ public class UserController {
 //        userService.updateUser(id, user);
     }
     @GetMapping
-    public List<UserDto> getAllUsers(@RequestParam(value="page", defaultValue = "1") int page,
+    public List<UserResponse> getAllUsers(@RequestParam(value="page", defaultValue = "1") int page,
                                    @RequestParam(value="limit", defaultValue="5") int limit){
-        List<UserDto> returnValue = userService.getAllUsers(page, limit);
+
+        List<UserDto> userList = userService.getAllUsers(page, limit);
+        List<UserResponse> returnValue = new ArrayList<UserResponse>();
+        for (UserDto eachUser : userList){
+            UserResponse userResponse = new UserResponse();
+            BeanUtils.copyProperties(eachUser, userResponse);
+            returnValue.add(userResponse);
+        }
         return returnValue;
     }
     @GetMapping("/{userId}")
-    public User getUser(@PathVariable String userId){
-        User returnValue = userService.getUser(userId);
+    public UserResponse getUser(@PathVariable String userId){
+        UserDto userDto = userService.getUser(userId);
+        UserResponse returnValue = new UserResponse();
+        BeanUtils.copyProperties(userDto, returnValue);
         return returnValue;
     }
     @GetMapping("/email/{email}")
-    public User getUser(@PathVariable String email){
-        User returnValue = userService.getUser(email);
+    public UserResponse getUserByEmail(@PathVariable String email){
+        UserDto userDto = userService.getUser(email);
+        UserResponse returnValue = new UserResponse();
+        BeanUtils.copyProperties(userDto, returnValue);
         return returnValue;
     }
 

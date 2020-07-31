@@ -7,7 +7,8 @@ import java.util.List;
 
 public interface UserRepository extends PagingAndSortingRepository<User, Integer> {
     User save(User user);
-    User findById(int id);
+//    User findById(String userId);
+    User findByUserId(String userId);
     User findByEmail(String email);
     List<User> findAll();
     void delete(User user);
