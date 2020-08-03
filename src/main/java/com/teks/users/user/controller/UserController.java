@@ -44,8 +44,8 @@ public class UserController {
         UserResponse returnValue = new UserResponse();
         BeanUtils.copyProperties(updatedUser, returnValue);
         return returnValue;
-//        userService.updateUser(id, user);
     }
+
     @GetMapping
     public List<UserResponse> getAllUsers(@RequestParam(value="page", defaultValue = "1") int page,
                                    @RequestParam(value="limit", defaultValue="5") int limit){

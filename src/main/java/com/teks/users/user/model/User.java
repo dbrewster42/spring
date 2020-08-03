@@ -4,9 +4,9 @@ import javax.persistence.*;
 
 @Entity
 public class User {
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.AUTO)
-//    private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
     private String userId;
     private String firstName;
     private String lastName;
@@ -16,7 +16,7 @@ public class User {
     private boolean emailVerificationStatus = false;
 
     public User(String firstName, String lastName, String email) {
-//        this.id = id;
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -33,6 +33,7 @@ public class User {
     public String getUserId(){
         return userId;
     }
+
     public void setEmailVerificationStatus(boolean emailVerificationStatus){
         this.emailVerificationStatus = emailVerificationStatus;
     }

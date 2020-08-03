@@ -38,7 +38,7 @@ public class UserServiceImplementation implements UserService {
         newUser.setEncryptedPassword("test");
         newUser.setEmailVerificationStatus(utils.emailIsValid(userDto));
         if (!newUser.getEmailVerificationStatus()){
-            throw new InvalidEmailException();
+            throw new InvalidEmailException("Email Is Not Valid!");
         }
         newUser.setUserId(utils.generateUserId(15));
 
