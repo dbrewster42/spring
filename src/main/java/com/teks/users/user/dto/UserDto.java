@@ -1,7 +1,7 @@
 package com.teks.users.user.dto;
 
 public class UserDto {
-    private int id;
+//    private int id;
     private String userId;
     private String firstName;
     private String lastName;
@@ -11,8 +11,8 @@ public class UserDto {
 //    private String emailVerificationToken;
     private String getEmailVerificationStatus;
 
-    public UserDto(int id, String userId, String firstName, String lastName, String email, String password, String encryptedPassword, String getEmailVerificationStatus) {
-        this.id = id;
+    public UserDto(String userId, String firstName, String lastName, String email, String password, String encryptedPassword, String getEmailVerificationStatus) {
+//        this.id = id;
         this.userId = userId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -23,14 +23,14 @@ public class UserDto {
     }
     public UserDto(){
     }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
+//
+//    public int getId() {
+//        return id;
+//    }
+//
+//    public void setId(int id) {
+//        this.id = id;
+//    }
 
     public String getUserId() {
         return userId;

@@ -49,10 +49,15 @@ public class UserServiceImplementation implements UserService {
         BeanUtils.copyProperties(storedUserDetails, returnValue);
         return returnValue;
     }
+
     @Override
     public UserDto updateUser(String userId, UserDto userDto){
         User updatedUser = userRepository.findByUserId(userId);
-        BeanUtils.copyProperties(updatedUser, userDto);
+        if (updatedUser == null){
+            throw new UserNotFoundException("The user does not exist");
+        }
+        userDto.setEmail(updatedUser.getEmail());
+        BeanUtils.copyProperties(userDto, updatedUser);
         userRepository.save(updatedUser);
         return userDto;
     }
