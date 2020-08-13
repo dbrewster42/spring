@@ -3,7 +3,7 @@ package com.teks.users.user.exceptions;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-@ResponseStatus(value = HttpStatus.NOT_FOUND)
+@ResponseStatus(value = HttpStatus.BAD_REQUEST)
 public class UserNotFoundException extends RuntimeException{
 //    private static final String = "User returned null";
     public UserNotFoundException(){

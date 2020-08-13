@@ -7,8 +7,10 @@ public class User {
 //    @Id
 //    @GeneratedValue(strategy = GenerationType.AUTO)
 //    private int id;
+    @Id
     @Column(nullable = false, unique = true)
     private String userId;
+
     private String firstName;
     private String lastName;
     @Column(nullable = false, unique = true)

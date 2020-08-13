@@ -75,12 +75,9 @@ public class UserController {
     }
 
     @DeleteMapping("/{userid}")
-    public void deleteUser(@PathVariable String userId){
+    public String deleteUser(@PathVariable String userId){
         userService.deleteUser(userId);
+        return "User Deleted";
     }
 }
-//    @PostMapping
-//    public void createUser(@RequestBody User user){
-//        userService.createUser(user);
-//    }
 

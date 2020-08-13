@@ -2,7 +2,6 @@ package com.teks.users.user.service;
 
 import com.teks.users.user.dto.UserDto;
 import com.teks.users.user.exceptions.InvalidEmailException;
-import com.teks.users.user.exceptions.UserExceptions;
 import com.teks.users.user.exceptions.UserNotFoundException;
 import com.teks.users.user.model.User;
 import com.teks.users.user.repository.UserRepository;
@@ -54,7 +53,7 @@ public class UserServiceImplementation implements UserService {
     public UserDto updateUser(String userId, UserDto userDto){
         User updatedUser = userRepository.findByUserId(userId);
         if (updatedUser == null){
-            throw new UserNotFoundException("The user does not exist");
+            throw new UserNotFoundException("User Not Found");
         }
         userDto.setEmail(updatedUser.getEmail());
         BeanUtils.copyProperties(userDto, updatedUser);
