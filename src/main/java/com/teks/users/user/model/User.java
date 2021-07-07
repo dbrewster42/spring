@@ -1,31 +1,46 @@
 package com.teks.users.user.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class User {
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.AUTO)
+//    private int id;
     @Id
-    @GeneratedValue
-    private int id;
+    @Column(nullable = false, unique = true)
+    private String userId;
 
     private String firstName;
     private String lastName;
     @Column(nullable = false, unique = true)
     private String email;
-    private String password;
+    private String encryptedPassword;
+    private boolean emailVerificationStatus = false;
 
-    public User(int id, String firstName, String lastName, String email, String password) {
-        this.id = id;
+    public User(String firstName, String lastName, String email) {
+//        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        this.password = password;
+//        this.encryptedPassword = encryptedPassword;
     }
 
     public User(){
+    }
+
+    public void setUserId(String userId){
+        this.userId = userId;
+    }
+
+    public String getUserId(){
+        return userId;
+    }
+    public void setEmailVerificationStatus(boolean emailVerificationStatus){
+        this.emailVerificationStatus = emailVerificationStatus;
+    }
+    public boolean getEmailVerificationStatus(){
+        return emailVerificationStatus;
     }
 
     public String getFirstName() {
@@ -52,12 +67,12 @@ public class User {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
+    public String getEncryptedPassword() {
+        return encryptedPassword;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setEncryptedPassword(String encryptedPassword) {
+        this.encryptedPassword = encryptedPassword;
     }
 
 }
